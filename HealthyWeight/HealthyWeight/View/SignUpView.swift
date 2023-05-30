@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+
+
 enum GenderSegmentedControllerItems{
     static let firstItem = "Kadın"
     static let secondItem = "Erkek"
@@ -18,7 +20,6 @@ enum motionStatusSegmentedControllerItems{
     static let much = "Çok"
 }
 class SignUpView: UIView {
-    
     
     let genderSegmentedController : UISegmentedControl = {
         let segmentedController = UISegmentedControl(items: [GenderSegmentedControllerItems.firstItem, GenderSegmentedControllerItems.secondItem])

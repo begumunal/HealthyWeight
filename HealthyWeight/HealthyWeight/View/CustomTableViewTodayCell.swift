@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
+class CustomTableViewTodayCell: UITableViewCell {
     
     // Hücre içeriği için label'lar ve image tanımlanır.
     let foodNameLabel = UILabel()
@@ -19,12 +19,13 @@ class CustomTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = AppColors.mainColor
         // label'ların ve image'in boyutları ve konumları ayarlanır.
-        foodNameLabel.frame = CGRect(x: 10, y: 0, width: 100, height: self.frame.height)
-        foodCalorieLabel.frame = CGRect(x: self.frame.width / 2 - 50, y: 0, width: 100, height: self.frame.height)
-        foodImage.frame = CGRect(x: self.frame.width - 60, y: 10, width: 40, height: 40)
-        
+     
+        foodImage.frame = CGRect(x: 30, y: 0, width: 40, height: 40)
+        foodNameLabel.frame = CGRect(x: self.frame.width / 2 - 50, y: 0, width: 100, height: self.frame.height)
+        foodCalorieLabel.frame = CGRect(x: self.frame.width - 60, y: 0, width: 100, height: self.frame.height)
         // label'ların ve image'in özellikleri ayarlanır.
         foodNameLabel.textColor = .black
+        foodNameLabel.font = .boldSystemFont(ofSize: 13)
         foodNameLabel.font = UIFont.systemFont(ofSize: 14)
         foodCalorieLabel.textColor = .black
         foodCalorieLabel.font = UIFont.systemFont(ofSize: 14)

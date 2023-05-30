@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 class LoginView : UIView{
     
@@ -49,8 +50,18 @@ class LoginView : UIView{
         
     }
    
+    private func videoPlayer(){
+       /* if let url = Bundle.main.url(forResource: "LoginViewVideo", withExtension: "mov") {
+            let player = AVPlayer(url: url)
+            let playerView = CustomVideoPlayer(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+            playerView.player = player
+            self.addSubview(playerView)
+            playerView.player?.play()
+        }*/
+    }
    
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }

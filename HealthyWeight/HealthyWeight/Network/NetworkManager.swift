@@ -33,8 +33,9 @@ class NetworkManager {
                     let firstItem = items?.first // ilk öğeyi alın
                     let calories = firstItem!["calories"] as? Double  // "calories" değerini çıkartın
                     print(calories!)
+                   
                     
-                    self.sendData(data: calories!)
+                    //self.sendData(data: calories!)
                     
                 }
             } catch {
@@ -46,8 +47,5 @@ class NetworkManager {
         }
         task.resume()
     }
-    func sendData(data : Double) {
-        var delegate: CalorieProtocol?
-        delegate?.passCalorie(data: data)
-    }
+    
 }

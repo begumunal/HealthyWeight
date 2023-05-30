@@ -13,7 +13,7 @@ import FirebaseAuth
 class ProfileViewController: UIViewController {
     private let toolBar = UIToolbar()
     private let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped))
-    private let dailyCalorieLabel : UILabel = {
+    let dailyCalorieLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 26, weight: .bold)
         label.textColor = AppColors.textColor
@@ -33,7 +33,12 @@ class ProfileViewController: UIViewController {
         self.setup()
         self.fetchData()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchData()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        fetchData()
+    }
     func setup(){
         self.view.backgroundColor = AppColors.mainColor
         toolBar.barTintColor = AppColors.barGreen
@@ -67,6 +72,7 @@ class ProfileViewController: UIViewController {
         ref.child("dailyCalorie").observeSingleEvent(of: .value, with: { (snapshot) in
             let dailyCalorie = snapshot.value as? Double ?? 0.0
             print("Daily Calorie: \(dailyCalorie)")
+            UserInfoManager.shared.userDailyCalorie = dailyCalorie
             self.dailyCalorieLabel.text = String(dailyCalorie)
         }) { (error) in
             print(error.localizedDescription)
@@ -76,5 +82,6 @@ class ProfileViewController: UIViewController {
 
     @objc func editButtonTapped(){
         
+        self.present(EditProfileViewController(), animated: true, completion: nil)
     }
 }

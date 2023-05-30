@@ -8,10 +8,12 @@
 import UIKit
 import CoreML
 import Vision
+import FirebaseAuth
+import FirebaseDatabase
 
 class AddItemViewController: UIViewController{
     
-    var calorie = Double()
+    var calorie : Double?
     let networkService = NetworkService()
     let networkManager = NetworkManager()
     var imagePicker = UIImagePickerController()
@@ -51,6 +53,7 @@ class AddItemViewController: UIViewController{
         imageView.backgroundColor = AppColors.barGreen
         toolBar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), cameraButton]
         self.calculateButton.addTarget(self, action: #selector(calculateButtonTapped), for: .touchUpInside)
+        self.continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
         self.toolBar.translatesAutoresizingMaskIntoConstraints = false
         self.imageInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -97,10 +100,7 @@ class AddItemViewController: UIViewController{
         ])
         
     }
-    override func viewWillAppear(_ animated: Bool) {
-        print(self.calorie)
-        self.imageCalorieLabel.text = String(self.calorie)
-    }
+   
     func detect(image : UIImage){
         
         guard let model = try? VNCoreMLModel(for: MyFoodClassifier_1().model) else {
@@ -111,9 +111,12 @@ class AddItemViewController: UIViewController{
                 // En yüksek olasılıklı sınıfın adını yazdırın.
                 print("En yüksek olasılıklı sınıf: \(topResult.identifier)")
                 self.imageInfoLabel.text = topResult.identifier
-                
+                //DispatchQueue.main.async {
                 self.networkService.getCalorie(query: topResult.identifier)
-            
+                
+                    
+                //}
+                
                 
                 
             }
@@ -121,8 +124,7 @@ class AddItemViewController: UIViewController{
         }
         let handler = VNImageRequestHandler(cgImage: image.cgImage!, options: [:])
         try? handler.perform([request])
-        print(calorie)
-        self.imageCalorieLabel.text = String(calorie)
+        
         /*if let calorie = calorie {
             print(calorie)
             self.imageCalorieLabel.text = String(calorie)
@@ -131,8 +133,13 @@ class AddItemViewController: UIViewController{
     @objc func cameraButtonTapped(){
         present(imagePicker, animated: true, completion: nil)
     }
-    
+    @objc func continueButtonTapped(){
+        self.saveToday()
+        let tabBar = CustomTabBarController()
+        self.present(tabBar, animated: true)
+    }
     @objc func calculateButtonTapped(){
+        guard let calorie = self.calorie else{return}
         print(calorie)
         self.imageCalorieLabel.text = String(calorie)
     }
@@ -149,4 +156,33 @@ extension AddItemViewController : UIImagePickerControllerDelegate, UINavigationC
             self.imagePicker.dismiss(animated: true,completion: nil)
         }
     }
+    
+    func saveToday(){
+        
+        let image = self.imageView.image!
+        let foodName = self.imageInfoLabel.text!
+        let foodCalorie = 540.8
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {return}
+        let base64String = imageData.base64EncodedString()
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let currentDateString = dateFormatter.string(from: currentDate)
+        let today = TodayModel(image: base64String, foodName: foodName, foodCalorie: foodCalorie, date: currentDateString)
+        do {
+            guard let currentUser = Auth.auth().currentUser else {return}
+            let userID = currentUser.uid 
+            print(userID)
+           
+            Database.database().reference().child("today").child(userID).setValue(["image" : today.image, "foodName" : today.foodName, "foodCalorie" : today.foodCalorie, "date" : today.date])
+            
+            print("kullanıcı bilgileri kaydedildi.")
+ 
+            
+        } catch {
+            print(error.localizedDescription)
+            print("kullanıcı bilgileri kaydedilirken sorun yaşandı.")
+        }
+    }
 }
+

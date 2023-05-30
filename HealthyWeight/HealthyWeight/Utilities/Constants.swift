@@ -19,4 +19,5 @@ enum Constants{
     static let historyVCTitle = "Geçmiş"
     static let profileVCTitle = "Profil"
     static let dailyCalorieTextLabel = "Günlük max kalori miktarı :"
+    static let editProfileButtonTitle = "Bilgilerimi Güncelle"
 }

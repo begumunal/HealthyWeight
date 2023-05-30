@@ -7,80 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2A7997E6-4A72-4FFD-945A-61E58D815224"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HealthyWeight/Network/NetworkManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "fetchNutritionInfo(for:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "2A7997E6-4A72-4FFD-945A-61E58D815224 - b8bdae5694c50f32"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in HealthyWeight.NetworkManager.fetchNutritionInfo(for: Swift.String, completion: (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "HealthyWeight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/begumunal/Developer/xcode/HealthyWeight/HealthyWeight/HealthyWeight/Network/NetworkManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "876">
-               </Location>
-               <Location
-                  uuid = "2A7997E6-4A72-4FFD-945A-61E58D815224 - b8bdae5694c50f32"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in HealthyWeight.NetworkManager.fetchNutritionInfo(for: Swift.String, completion: (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "HealthyWeight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/begumunal/Developer/xcode/HealthyWeight/HealthyWeight/HealthyWeight/Network/NetworkManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "1228">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "325E87D3-974A-4177-942C-D0CDE90DC5B9"
+            uuid = "908A5359-C82F-4FCE-934F-7BD534B48FB8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HealthyWeight/Controller/AddItemViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "detect(image:)"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "calculateButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DEC7CF0E-D9A3-4FA7-B7B6-8213667690DF"
+            uuid = "D8342732-0A09-4E6F-AAE1-0CA99B29FEEB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HealthyWeight/Controller/TodayViewController.swift"
+            filePath = "HealthyWeight/Network/NetworkService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "getCalorie(query:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

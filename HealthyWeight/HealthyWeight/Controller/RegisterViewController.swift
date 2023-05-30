@@ -105,30 +105,19 @@ class RegisterViewController: UIViewController {
         if self.loginView.emailTextField.text != "" && self.loginView.passwordTextField.text != ""{
             Auth.auth().signIn(withEmail: self.loginView.emailTextField.text!, password: self.loginView.passwordTextField.text!) { (user, error) in
                 if error == nil {
-                    // Kullanıcı başarılı bir şekilde giriş yaptı
-                    // Burada gerekli işlemleri yapabilirsiniz
-                    let tabBar = UITabBarController()
-                    let vc1 = TodayViewController()
-                    let vc2 = HistoryViewController()
-                    let vc3 = ProfileViewController()
                     
-                    vc1.tabBarItem = UITabBarItem(title: Constants.todayVCTitle, image: UIImage(systemName: "calendar.badge.plus"), tag: 0)
-                    vc2.tabBarItem = UITabBarItem(title: Constants.historyVCTitle, image: UIImage(systemName: "timer"), tag: 1)
-                    vc3.tabBarItem = UITabBarItem(title: Constants.profileVCTitle, image: UIImage(systemName: "person"), tag: 2)
-                    tabBar.setViewControllers([vc1, vc2, vc3], animated: false)
-                    tabBar.modalPresentationStyle = .fullScreen
-                    tabBar.tabBar.backgroundColor = AppColors.barGreen
-                    tabBar.tabBar.tintColor = AppColors.textColor
-                    self.present(tabBar, animated: true, completion: nil)
+                    let tabBar = CustomTabBarController()
+                    self.present(tabBar, animated: true)
                 } else {
                     // Kullanıcı henüz kayıtlı değil
-                    //self.makeAlert(title: "", message: "Böyle bir kullanıcı yok. Bilgilerinizi kontrol ediniz.")
+                    let alertView = AlertView.makeAlertForErrors(message: "Böyle bir kullanıcı yok.")
+                    self.view.addSubview(alertView)
                 }
                 
             }
         }else{
-            //self.makeAlert(title: "", message: "Geçerli bilgiler giriniz.")
-
+            let alertView = AlertView.makeAlertForErrors(message: "Lütfen geçerli Bilgiler giriniz")
+            view.addSubview(alertView)
         }
         
     }
@@ -139,9 +128,8 @@ class RegisterViewController: UIViewController {
                 if error == nil {
                     // Kullanıcı zaten var
                    
-                    //let alert = AlertView.makeAlertForErrors(message: "Girdiğiniz bilgiler zaten Kayıtlı!")
-                    //view.addSubview(alert)
-                    //view.bringSubviewToFront(alert)
+                    let alertView = AlertView.makeAlertForErrors(message: "Kullanıcı zaten kayıtlı.")
+                    self.view.addSubview(alertView)
         
                 } else {
                     // Kullanıcı henüz kayıtlı değil
@@ -155,13 +143,15 @@ class RegisterViewController: UIViewController {
                           self.userId = userId
                           print("Kullanıcı kaydı başarılı")
 
+                          AlertView.makeAlert(title: "", message: "Kullanıcı kaydı başarılı. Giriş Yapınız", viewC: self)
                           self.saveInfo()
                       }
                     }
                 }
             }
         }else{
-            //self.makeAlert(title: "", message: "Geçerli bilgiler giriniz.")
+            let alertView = AlertView.makeAlertForErrors(message: "Lütfen geçerli Bilgiler giriniz")
+            self.view.addSubview(alertView)
         }
     }
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
