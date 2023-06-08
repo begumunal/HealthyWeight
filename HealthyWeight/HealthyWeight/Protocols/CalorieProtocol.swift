@@ -8,7 +8,7 @@
 import Foundation
 
 
-protocol CalorieProtocol{
+protocol CalorieProtocol: AnyObject{
     
-    func passCalorie(data : Double)
+    var calorieValue: Double { get set }
 }

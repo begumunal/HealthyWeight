@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class NetworkService{
+    private weak var calorie: CalorieProtocol?
     let networkManager = NetworkManager()
     //let addItemVC = AddItemViewController()
     func getCalorie(query : String){
@@ -22,10 +23,11 @@ class NetworkService{
                         if let item = response.items.first {
                             let calories = item.calories
                             print("Calories: \(calories)")
+                            self.calorie?.calorieValue = calories
                             DispatchQueue.main.async {
-                                let addItemVC = AddItemViewController()
-                                addItemVC.calorie = calories
-                                addItemVC.imageCalorieLabel.text = String(calories)
+                                //let addItemVC = AddItemViewController()
+                                //addItemVC.calorie = calories
+                                //addItemVC.imageCalorieLabel.text = String(calories)
                             }
                             
                             

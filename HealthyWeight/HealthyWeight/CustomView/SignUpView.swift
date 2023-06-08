@@ -26,7 +26,7 @@ class SignUpView: UIView {
         segmentedController.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], for: .normal)
         segmentedController.backgroundColor = AppColors.mainColor
         segmentedController.selectedSegmentTintColor = AppColors.barGreen
-        segmentedController.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: AppColors.textColor], for: .normal)
+        segmentedController.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: AppColors.textColor!], for: .normal)
         segmentedController.layer.borderWidth = 0.3
         segmentedController.layer.borderColor = AppColors.barGreen?.cgColor
         return segmentedController
@@ -48,7 +48,7 @@ class SignUpView: UIView {
         segmentedController.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], for: .normal)
         segmentedController.backgroundColor = AppColors.mainColor
         segmentedController.selectedSegmentTintColor = AppColors.barGreen
-        segmentedController.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: AppColors.textColor], for: .normal)
+        segmentedController.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: AppColors.textColor!], for: .normal)
         segmentedController.layer.borderWidth = 0.3
         segmentedController.layer.borderColor = AppColors.barGreen?.cgColor
         return segmentedController

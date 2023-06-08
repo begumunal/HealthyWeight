@@ -23,7 +23,7 @@ class CustomTextField: UITextField {
     }
     private func configure(keyboardType : UIKeyboardType, text : String?) {
         isUserInteractionEnabled = true
-        attributedPlaceholder = NSAttributedString(string: text ?? "", attributes: [NSAttributedString.Key.foregroundColor: AppColors.textColor])
+        attributedPlaceholder = NSAttributedString(string: text ?? "", attributes: [NSAttributedString.Key.foregroundColor: AppColors.textColor!])
         self.keyboardType = keyboardType
         font = UIFont.systemFont(ofSize: 12, weight: .medium)
         leftView = self.leftPadding

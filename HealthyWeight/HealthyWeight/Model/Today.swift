@@ -8,15 +8,15 @@
 import Foundation
 import UIKit
 
-struct TodayModel{
+struct FoodModel{
     var image : String 
     var foodName: String
     var foodCalorie: Double
-    var date: String
-    init(image: String, foodName: String, foodCalorie: Double, date: String) {
+    
+    init(image: String, foodName: String, foodCalorie: Double) {
         self.image = image
         self.foodName = foodName
         self.foodCalorie = foodCalorie
-        self.date = date
+        
     }
 }

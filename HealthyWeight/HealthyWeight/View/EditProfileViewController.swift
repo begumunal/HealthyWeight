@@ -10,7 +10,17 @@ import FirebaseCore
 import FirebaseAuth
 import FirebaseDatabase
 
-class EditProfileViewController: UIViewController {
+protocol IEditProfileView: AnyObject{
+    func prepareView()
+    func prepareUserInfoView()
+    func prepareUpdateButton()
+    func updateInfo()
+    func decideGender(isWomen: Bool)
+    func decideMotionState(choice: Int)
+}
+final class EditProfileViewController: UIViewController {
+    lazy var viewModel = EditProfileViewModel()
+    
     private var isWomen = true
     private var motionState : Int = 0
     private let userInfoView = SignUpView()
@@ -18,74 +28,67 @@ class EditProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userInfoView.signupButton.layer.opacity = 0
-        userInfoView.emailTextField.layer.opacity = 0
-        userInfoView.passwordTextField.layer.opacity = 0
-        setup()
-    }
-    
-    func setup(){
-        userInfoView.genderSegmentedController.addTarget(self, action: #selector(genderSegmentedControlValueChanged(_:)), for: .valueChanged)
-        userInfoView.motionStatusSegmentedController.addTarget(self, action: #selector(motionStatusSegmentedControllerValueChanged(_:)), for: .valueChanged)
-        self.updateButton.addTarget(self, action: #selector(self.updateButtonTapped), for: .touchUpInside)
-        self.userInfoView.motionStatusSegmentedController.selectedSegmentIndex = 0
-        self.userInfoView.genderSegmentedController.selectedSegmentIndex = 0
-        
-        self.view.backgroundColor = AppColors.mainColor
-        self.updateButton.translatesAutoresizingMaskIntoConstraints = false
-        self.userInfoView.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(self.userInfoView)
-        view.addSubview(self.updateButton)
-        
-        NSLayoutConstraint.activate([
-            self.userInfoView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 60),
-            self.userInfoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            self.userInfoView.widthAnchor.constraint(equalToConstant: view.frame.width),
-            self.userInfoView.heightAnchor.constraint(equalToConstant: 400),
-            
-            self.updateButton.widthAnchor.constraint(equalToConstant: 200),
-            self.updateButton.heightAnchor.constraint(equalToConstant: 40),
-            self.updateButton.topAnchor.constraint(equalTo: self.userInfoView.bottomAnchor, constant: 60),
-            self.updateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-       
-        ])
+        viewModel.view = self
+        viewModel.viewDidLoad()
     }
 
     @objc func updateButtonTapped(){
-        if userInfoView.ageTextField.text != "" && userInfoView.lengthTextField.text != "" && userInfoView.currentWeightTextField.text != "" && userInfoView.goalWeightTextField.text != "" {
-            
-            self.updateInfo()
-            
-        }
+        viewModel.updateButtonTapped(age: userInfoView.ageTextField.text!, length: userInfoView.lengthTextField.text!, currentWeight: userInfoView.currentWeightTextField.text!, goalWeight: userInfoView.goalWeightTextField.text!)
     }
+    
     @objc func genderSegmentedControlValueChanged(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            self.isWomen = true
-        case 1:
-            self.isWomen = false
-        default:
-            break
-        }
+        viewModel.genderSegmentedControlValueChanged(sender)
     }
+    
     @objc func motionStatusSegmentedControllerValueChanged(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            print("az")
-            self.motionState = 0
-        case 1:
-            print("hafif")
-            self.motionState = 1
-        case 2:
-            print("orta")
-            self.motionState = 2
-        case 3:
-            print("çok")
-            self.motionState = 3
-        default:
-            break
-        }
+        viewModel.motionStatusSegmentedControllerValueChanged(sender)
+    }
+}
+
+extension EditProfileViewController: IEditProfileView{
+    func decideMotionState(choice: Int) {
+        self.motionState = choice
+    }
+    
+    func decideGender(isWomen: Bool) {
+        self.isWomen = isWomen
+    }
+    
+    func prepareView() {
+        view.backgroundColor = AppColors.mainColor
+        updateButton.translatesAutoresizingMaskIntoConstraints = false
+        userInfoView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(userInfoView)
+        view.addSubview(updateButton)
+    }
+    
+    func prepareUserInfoView() {
+        userInfoView.signupButton.layer.opacity = 0
+        userInfoView.emailTextField.layer.opacity = 0
+        userInfoView.passwordTextField.layer.opacity = 0
+        userInfoView.genderSegmentedController.addTarget(self, action: #selector(genderSegmentedControlValueChanged(_:)), for: .valueChanged)
+        userInfoView.motionStatusSegmentedController.addTarget(self, action: #selector(motionStatusSegmentedControllerValueChanged(_:)), for: .valueChanged)
+        userInfoView.motionStatusSegmentedController.selectedSegmentIndex = 0
+        userInfoView.genderSegmentedController.selectedSegmentIndex = 0
+        NSLayoutConstraint.activate([
+           userInfoView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 60),
+           userInfoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+           userInfoView.widthAnchor.constraint(equalToConstant: view.frame.width),
+           userInfoView.heightAnchor.constraint(equalToConstant: 400),
+       
+        ])
+    }
+    
+    func prepareUpdateButton() {
+        updateButton.addTarget(self, action: #selector(self.updateButtonTapped), for: .touchUpInside)
+        NSLayoutConstraint.activate([
+            updateButton.widthAnchor.constraint(equalToConstant: 200),
+            updateButton.heightAnchor.constraint(equalToConstant: 40),
+            updateButton.topAnchor.constraint(equalTo: self.userInfoView.bottomAnchor, constant: 60),
+            updateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+       
+        ])
     }
     func updateInfo(){
 
@@ -142,4 +145,5 @@ class EditProfileViewController: UIViewController {
         }
         
     }
+    
 }
