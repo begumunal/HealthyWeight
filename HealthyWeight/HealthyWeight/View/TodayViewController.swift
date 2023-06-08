@@ -9,20 +9,26 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import FirebaseDatabase
+import CoreML
+import Vision
 
 protocol ITodayView: AnyObject, SeguePerformable{
     func prepareView()
     func prepareTableView()
     func prepareToolBar()
     func prepareAddButton()
+    func prepareImagePicker()
     func prepareLabel()
     func fetchTableViewData()
-    func goToNextVC()
     func loadData()
+    func makePresent()
+    func printFoodName(foodName: String)
 }
+
 final class TodayViewController: UIViewController {
     lazy var viewModel = TodayViewModel()
-    
+    let networkService = NetworkService()
+    var imagePicker = UIImagePickerController()
     var total = 0.0
     var foods: [FoodModel] = []
     var tableView = UITableView()
@@ -43,15 +49,20 @@ final class TodayViewController: UIViewController {
     @objc func addButtonTapped(){
         viewModel.addButtonTapped()
     }
-    
+    func detect(image : UIImage){
+        viewModel.detect(image: image)
+    }
 }
 extension TodayViewController: ITodayView{
 
-    func goToNextVC() {
-        let nextVC = AddItemViewController()
-        makePushVC(nextVC: nextVC)
+    func makePresent() {
+        present(imagePicker, animated: true, completion: nil)
     }
-    
+    func printFoodName(foodName: String) {
+        print("En yüksek olasılıklı sınıf: \(foodName)")
+        UserInfoManager.shared.foodName = foodName
+        self.networkService.getCalorie(query: UserInfoManager.shared.foodName!)
+    }
     func fetchTableViewData() {
         self.foods = []
         self.loadData()
@@ -66,7 +77,11 @@ extension TodayViewController: ITodayView{
         view.addSubview(tableView)
         view.addSubview(label)
     }
-    
+    func prepareImagePicker() {
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .camera
+    }
     func prepareLabel() {
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: self.toolBar.bottomAnchor, constant: 0),
@@ -123,4 +138,17 @@ extension TodayViewController: ITodayView{
         }
     }
 }
-
+extension TodayViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let userPickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            /*guard let convertedCIImage = CIImage(image: userPickedImage)else {
+             fatalError("connot convert to CIImage")
+             }*/
+            detect(image: userPickedImage)
+            UserInfoManager.shared.foodImage = userPickedImage
+            self.imagePicker.dismiss(animated: true,completion: nil)
+            let nextVC = AddItemViewController()
+            makePushVC(nextVC: nextVC)
+        }
+    }
+}

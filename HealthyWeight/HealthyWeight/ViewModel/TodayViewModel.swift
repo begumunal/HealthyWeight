@@ -6,12 +6,16 @@
 //
 
 import Foundation
+import UIKit
+import CoreML
+import Vision
 
 protocol ITodayViewModel{
     var view: ITodayView? {get set}
     func viewDidLoad()
     func viewWillAppear()
     func addButtonTapped()
+    func detect(image : UIImage)
 }
 final class TodayViewModel{
     weak var view: ITodayView?
@@ -23,6 +27,7 @@ extension TodayViewModel: ITodayViewModel{
         view?.prepareLabel()
         view?.prepareAddButton()
         view?.prepareTableView()
+        view?.prepareImagePicker()
     }
     
     func viewWillAppear() {
@@ -30,8 +35,21 @@ extension TodayViewModel: ITodayViewModel{
     }
     
     func addButtonTapped() {
-        view?.goToNextVC()
+        view?.makePresent()
     }
-    
+    func detect(image: UIImage) {
+        guard let model = try? VNCoreMLModel(for: MyFoodClassifier_1().model) else {
+            fatalError("Failed to load model")
+        }
+        let request = VNCoreMLRequest(model: model) { request, error in
+            if let results = request.results as? [VNClassificationObservation], let topResult = results.first {
+                // En yüksek olasılıklı sınıfın adını yazdırın.
+                self.view?.printFoodName(foodName: topResult.identifier)
+       
+            }
+        }
+        let handler = VNImageRequestHandler(cgImage: image.cgImage!, options: [:])
+        try? handler.perform([request])
+    }
     
 }

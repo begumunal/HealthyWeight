@@ -6,12 +6,16 @@
 //
 
 import Foundation
+import UIKit
 
 //Singleton
 class UserInfoManager {
     static let shared = UserInfoManager()
     var userID: String?
     var userDailyCalorie : Double?
+    var foodName: String?
+    var foodCalorie: Double?
+    var foodImage: UIImage?
     
     private init() {}
 }
