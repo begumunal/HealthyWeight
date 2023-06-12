@@ -28,6 +28,7 @@
 		3343CEFE2A04FDF90025503B /* CalorieProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3343CEFD2A04FDF90025503B /* CalorieProtocol.swift */; };
 		3343CF002A0829780025503B /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3343CEFF2A0829780025503B /* UserInfoManager.swift */; };
 		3343CF022A08D40C0025503B /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3343CF012A08D40C0025503B /* EditProfileViewController.swift */; };
+		335FDBD22A31E8FA00771802 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335FDBD12A31E8FA00771802 /* HistoryViewController.swift */; };
 		33DF02082A09187300D2FB6A /* LoginViewVideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 33DF02072A09187300D2FB6A /* LoginViewVideo.mov */; };
 		33DF020A2A091B4300D2FB6A /* CustomVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF02092A091B4300D2FB6A /* CustomVideoPlayer.swift */; };
 		33EC575F2A03C11000D9A8B8 /* CustomTableViewTodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC575E2A03C11000D9A8B8 /* CustomTableViewTodayCell.swift */; };
@@ -104,6 +105,7 @@
 		3343CEFD2A04FDF90025503B /* CalorieProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieProtocol.swift; sourceTree = "<group>"; };
 		3343CEFF2A0829780025503B /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		3343CF012A08D40C0025503B /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		335FDBD12A31E8FA00771802 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		33DF02072A09187300D2FB6A /* LoginViewVideo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = LoginViewVideo.mov; sourceTree = "<group>"; };
 		33DF02092A091B4300D2FB6A /* CustomVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoPlayer.swift; sourceTree = "<group>"; };
 		33EC575E2A03C11000D9A8B8 /* CustomTableViewTodayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewTodayCell.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				33170F0D2A0272FA00975863 /* ProfileViewController.swift */,
 				33170F0F2A0280BB00975863 /* AddItemViewController.swift */,
 				3343CF012A08D40C0025503B /* EditProfileViewController.swift */,
+				335FDBD12A31E8FA00771802 /* HistoryViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				33F477892A010592002CB0BD /* SceneDelegate.swift in Sources */,
 				33F477AC2A01175F002CB0BD /* CustomButton.swift in Sources */,
 				33170F0E2A0272FA00975863 /* ProfileViewController.swift in Sources */,
+				335FDBD22A31E8FA00771802 /* HistoryViewController.swift in Sources */,
 				330BA8192A2E7FCC007BF1E4 /* EditProfileViewModel.swift in Sources */,
 				33F477EE2A01324D002CB0BD /* User.swift in Sources */,
 				33F477B22A011B9B002CB0BD /* LoginView.swift in Sources */,

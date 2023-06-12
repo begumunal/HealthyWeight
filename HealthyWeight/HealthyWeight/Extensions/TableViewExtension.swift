@@ -18,7 +18,7 @@ extension TodayViewController : UITableViewDelegate, UITableViewDataSource{
    
         cell.foodImage.image = UtilityFunctions.convertBase64EncodedToUIImage(self.foods[indexPath.row].image)
         cell.foodNameLabel.text = foods[indexPath.row].foodName
-        cell.foodCalorieLabel.text = String(foods[indexPath.row].foodCalorie)
+        cell.foodCalorieLabel.text = String(foods[indexPath.row].foodCalorie) + " cal"
         return cell
     }
 }

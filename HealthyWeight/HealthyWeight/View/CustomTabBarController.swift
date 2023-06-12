@@ -21,16 +21,19 @@ class CustomTabBarController: UITabBarController {
     }
     
     private func setupViewControllers() {
-        let vc1 = TodayViewController()
-        let vc2 = ProfileViewController()
+        //let vc1 = HistoryViewController()
+        let vc2 = TodayViewController()
+        let vc3 = ProfileViewController()
 
-        vc1.tabBarItem = UITabBarItem(title: Constants.todayVCTitle, image: UIImage(systemName: "calendar.badge.plus"), tag: 0)
+       // vc1.tabBarItem = UITabBarItem(title: Constants.historyVCTitle, image: UIImage(systemName: "timer"), tag: 0)
         
-        vc2.tabBarItem = UITabBarItem(title: Constants.profileVCTitle, image: UIImage(systemName: "person"), tag: 2)
+        vc2.tabBarItem = UITabBarItem(title: Constants.todayVCTitle, image: UIImage(systemName: "calendar.badge.plus"), tag: 1)
+        
+        vc3.tabBarItem = UITabBarItem(title: Constants.profileVCTitle, image: UIImage(systemName: "person"), tag: 2)
        
         self.modalPresentationStyle = .fullScreen
         
-        let viewControllers = [vc1, vc2]
+        let viewControllers = [vc2, vc3]
         self.setViewControllers(viewControllers, animated: false)
     }
 }
